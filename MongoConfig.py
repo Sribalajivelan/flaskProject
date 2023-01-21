@@ -8,5 +8,4 @@ app.config['MONGODB_SETTINGS'] = {
     'host': 'localhost',
     'port': 27017
 }
-db = MongoEngine()
-db.init_app(app)
+db = MongoEngine(app)

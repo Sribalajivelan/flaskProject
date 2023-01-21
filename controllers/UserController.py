@@ -1,4 +1,4 @@
-from flask import jsonify, Blueprint, request
+from flask import jsonify, Blueprint, request, make_response
 from flask_jwt_extended import create_access_token, jwt_required
 
 from models.Users import User
@@ -21,7 +21,7 @@ def login():
     if not users:
         return jsonify({'msg': 'Username Not Found'}), 404
     access_token = create_access_token(identity=request_body['email'])  # create jwt token
-    return jsonify(access_token=access_token), 200
+    return make_response(jsonify(access_token=access_token), 200)
 
 
 @user_api.route("/email/<string:email>", methods=['GET'])
@@ -30,4 +30,7 @@ def get_user_by_id(email):
     users = User.objects(email=email).first()
     if not users:
         return jsonify({'msg': 'Username Not Found'}), 404
-    return jsonify(result=users.to_json()), 200
+    response = make_response(users.to_json(), 200)
+    response.headers["Content-Type"] = "application/json"
+    return response
+
