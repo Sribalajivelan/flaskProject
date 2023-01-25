@@ -1,4 +1,4 @@
-from flask import make_response
+from flask import make_response, jsonify
 import json
 
 
@@ -12,7 +12,14 @@ class ResponseModel:
         response = make_response({
             'code': self.code,
             'message': self.message,
-            'result': json.loads(self.result)
+            'result': json.load(self.result)
         }, status_code)
         response.headers["Content-Type"] = "application/json"
         return response
+
+    def to_jsonify_response(self, status_code):
+        return jsonify({
+            'code': self.code,
+            'message': self.message,
+            'result': self.result
+        } ), status_code

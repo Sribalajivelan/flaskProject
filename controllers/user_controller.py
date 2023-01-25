@@ -22,7 +22,12 @@ def login():
     if not users:
         return jsonify({'msg': 'Username Not Found'}), 404
     access_token = create_access_token(identity=request_body['email'])  # create jwt token
-    return make_response(jsonify(access_token=access_token), 200)
+    result = {
+        'id': users.id.__str__(),
+        'email': users.email,
+        'access_token': access_token
+    }
+    return ResponseModel(1, "Login Details", result).to_jsonify_response(200)
 
 
 @user_api.route("/email/<string:email>", methods=['GET'])
