@@ -1,3 +1,4 @@
+from flask_migrate import Migrate
 from flask import Flask
 from flask_mongoengine import MongoEngine
 
@@ -9,3 +10,4 @@ app.config['MONGODB_SETTINGS'] = {
     'port': 27017
 }
 db = MongoEngine(app)
+migrate = Migrate(app, db)

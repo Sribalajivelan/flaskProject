@@ -1,3 +1,4 @@
 Flask==2.2.2
-flask_mongoengine
-flask_jwt_extended
+flask-mongoengine
+flask-jwt-extended
+flask-migrate
