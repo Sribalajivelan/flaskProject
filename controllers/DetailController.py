@@ -36,11 +36,13 @@ def update_data(id: str):
     body = request.get_json()
     data = Detail.objects.get_or_404(id=id)
     data.update(**body)
-    return jsonify(str(data.id)), 200
+    return get_one_detail(id)
 
 
 @detail_api.route('/<id>', methods=['DELETE'])
 def delete_data(id: int):
     data = Detail.objects.get_or_404(id=id)
     data.delete()
-    return jsonify(str(data.id)), 200
+    response = make_response(data.to_json(), 200)
+    response.headers["Content-Type"] = "application/json"
+    return response
