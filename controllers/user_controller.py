@@ -1,4 +1,4 @@
-from flask import jsonify, Blueprint, request, make_response
+from flask import jsonify, Blueprint, request
 from flask_jwt_extended import create_access_token, jwt_required
 
 from dao.users import User

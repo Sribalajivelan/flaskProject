@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request
 
 from dao.details import Detail
 from dto.response_model import ResponseModel

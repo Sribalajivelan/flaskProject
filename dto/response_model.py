@@ -1,5 +1,6 @@
-from flask import make_response, jsonify
 import json
+
+from flask import make_response, jsonify
 
 
 class ResponseModel:
