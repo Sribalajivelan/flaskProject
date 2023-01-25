@@ -1,7 +1,8 @@
 from flask import jsonify, Blueprint, request, make_response
 from flask_jwt_extended import create_access_token, jwt_required
 
-from models.Users import User
+from dao.users import User
+from dto.response_model import ResponseModel
 
 user_api = Blueprint('user_api', __name__)
 
@@ -11,7 +12,7 @@ def create_user():
     users = User.objects(email="sribalajivelan@gmail.com").first()
     if not users:
         users = User(name='Balaji', email='sribalajivelan@gmail.com').save()
-    return jsonify({'name': users.name})
+    return ResponseModel(1, "User Added", users.to_json()).to_json_response(200)
 
 
 @user_api.route('/login', methods=['POST'])
@@ -30,7 +31,5 @@ def get_user_by_id(email):
     users = User.objects(email=email).first()
     if not users:
         return jsonify({'msg': 'Username Not Found'}), 404
-    response = make_response(users.to_json(), 200)
-    response.headers["Content-Type"] = "application/json"
-    return response
+    return ResponseModel(1, "User", users.to_json()).to_json_response(200)
 

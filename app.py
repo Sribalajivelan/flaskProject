@@ -3,8 +3,8 @@ import datetime
 from flask import Flask
 from flask_jwt_extended import JWTManager
 
-from controllers.DetailController import detail_api
-from controllers.UserController import user_api
+from controllers.detail_controller import detail_api
+from controllers.user_controller import user_api
 
 app = Flask(__name__)
 app.register_blueprint(user_api, url_prefix = '/users')

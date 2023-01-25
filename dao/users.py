@@ -1,4 +1,4 @@
-from MongoConfig import db
+from mongo_config import db
 
 
 class User(db.Document):
