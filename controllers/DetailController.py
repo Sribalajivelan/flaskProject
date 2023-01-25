@@ -23,6 +23,14 @@ def get_all():
     return response
 
 
+@detail_api.route('/<id>', methods=['GET'])
+def get_one_detail(id: str):
+    data = Detail.objects.get_or_404(id=id)
+    response = make_response(data.to_json(), 200)
+    response.headers["Content-Type"] = "application/json"
+    return response
+
+
 @detail_api.route('/<id>', methods=['PUT'])
 def update_data(id: str):
     body = request.get_json()
